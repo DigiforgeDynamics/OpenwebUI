@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OpenWebUI - Local AI with Ollama</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #f0f0f0;
+    }
+
+    a {
+      color: #1fc2c8;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      background: linear-gradient(to right, #00c9a7, #007a8c);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,255,204,0.05);
+    }
+
+    h1, h2, h3 {
+      color: #00e0d0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      margin: 1rem 1rem 1rem 0;
+      background: #00c9a7;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #009e88;
+      cursor: pointer;
+    }
+
+    pre {
+      background-color: #2d2d2d;
+      color: #f8f8f8;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    code {
+      color: #00e0d0;
+    }
+
+    ul {
+      list-style: disc;
+      padding-left: 1.5rem;
+    }
+
+    .tab-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .tab-buttons button {
+      background: #2a2a2a;
+      color: #00e0d0;
+      border: 1px solid #444;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .tab-buttons button.active {
+      background: #00e0d0;
+      color: #121212;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: bold;
+      color: #00e0d0;
+      margin-top: 1rem;
+    }
+
+    .faq-section details {
+      margin-bottom: 1rem;
+      background: #2b2b2b;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+
+    .version-badge {
+      background: #292929;
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      color: #00ffcc;
+      border: 1px solid #00e0d0;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>OpenWebUI + Ollama <span class="version-badge">v2.0 Local Deployment</span></h1>
+  <p>Run Open Source LLMs with a Modern UI & Full Local Control</p>
+</header>
+
+<div class="container">
+  <h2>Overview</h2>
+  <p>
+    <strong>OpenWebUI</strong> is a sleek, self-hosted UI for interacting with local LLMs via
+    <strong><a href="https://ollama.com" target="_blank">Ollama</a></strong> — a platform to run AI models like LLaMA3, Gemma, and Mistral directly on your machine.
+  </p>
+
+  <h2>🧱 Installation</h2>
+
+  <div class="tab-buttons">
+    <button class="tab-btn active" data-tab="ollama">Install Ollama</button>
+    <button class="tab-btn" data-tab="pip">Pip Method</button>
+    <button class="tab-btn" data-tab="docker">Docker Method</button>
+  </div>
+
+  <div id="ollama" class="tab-content active">
+    <h3>1️⃣ Install Ollama</h3>
+    <ul>
+      <li>Visit <a href="https://ollama.com" target="_blank">https://ollama.com</a></li>
+      <li>Download for Windows, macOS, or Linux</li>
+      <li>Install and verify by running:</li>
+    </ul>
+    <pre><code>ollama run llama3</code></pre>
+    <p>This downloads and runs the LLaMA3 model locally.</p>
+  </div>
+
+  <div id="pip" class="tab-content">
+    <h3>2️⃣ Install OpenWebUI via pip</h3>
+    <pre><code>pip install open-webui
+open-webui serve</code></pre>
+    <ul>
+      <li><code>pip install open-webui</code> installs the package</li>
+      <li><code>open-webui serve</code> launches the UI on <code>http://localhost:3000</code></li>
+    </ul>
+  </div>
+
+  <div id="docker" class="tab-content">
+    <h3>2️⃣ Install OpenWebUI via Docker (Recommended)</h3>
+    <pre><code>docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway \
+-v open-webui:/app/backend/data --name open-webui --restart always \
+ghcr.io/open-webui/open-webui:main</code></pre>
+    <ul>
+      <li>Containerized and easy to maintain</li>
+      <li>Runs fully isolated on <code>localhost:3000</code></li>
+      <li>Data persists in Docker volume <code>open-webui</code></li>
+    </ul>
+  </div>
+
+  <h2>📚 Features</h2>
+  <ul>
+    <li>Responsive UI with dark/light themes</li>
+    <li>Supports popular open-source LLMs via Ollama</li>
+    <li>Custom templates, markdown, and context features</li>
+    <li>Secure: all interactions are fully local</li>
+  </ul>
+
+  <h2>❓ FAQs</h2>
+  <div class="faq-section">
+    <details>
+      <summary>Do I need internet access to use OpenWebUI?</summary>
+      <p>Only during the first download of models via Ollama. Once pulled, everything runs offline.</p>
+    </details>
+    <details>
+      <summary>What if I want to use a different model?</summary>
+      <p>Run <code>ollama run mistral</code> or any other supported model name after installing via Ollama.</p>
+    </details>
+    <details>
+      <summary>Can I run it on ARM-based chips?</summary>
+      <p>Yes, both Ollama and OpenWebUI support Apple Silicon and other ARM platforms with compatible images.</p>
+    </details>
+  </div>
+
+  <h2>🔗 External Links</h2>
+  <a href="https://github.com/open-webui/open-webui" class="btn" target="_blank">GitHub Repository</a>
+  <a href="https://ollama.com" class="btn" target="_blank">Ollama Website</a>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll('.tab-btn');
+  const tabs = document.querySelectorAll('.tab-content');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      tabs.forEach(tab => tab.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
